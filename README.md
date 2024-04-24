@@ -34,6 +34,14 @@ module "data_quality_checks" {
             checkIdx1 = {
                 checks_specification = "path/to/check.specification.yaml"   # Path to the check specification file
                 execution_spec = {} 
+                # Alternative execution specification for scheduled checks
+                # execution_spec = {
+                #     trigger = {
+                #         schedule = {
+                #             cron = "0 0 * * *"
+                #         }
+                #     }
+                # }
                 # BigQuery table to be checked
                 bigquery = {
                     dataset_id = "adm_exchange_rates_raw"
