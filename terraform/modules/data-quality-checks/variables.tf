@@ -47,7 +47,7 @@ variable "QA" {
         })
         # Optional schedule for the QA checks (if not provided, the checks will be run on-demand)
         execution_spec = object({
-          field = optional(string)
+          field = optional(string) # Field to be used for incremental scans
           trigger = optional(
             object({
               schedule = object({
