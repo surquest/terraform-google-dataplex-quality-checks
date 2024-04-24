@@ -8,8 +8,8 @@ variable "GCP" {
   })
 
   validation {
-    condition     = length(var.GCP.id) > 0 && length(var.GCP.name) > 0 && var.GCP.number > 0 && length(var.GCP.region) > 0 && length(var.GCP.zone) > 0
-    error_message = "The GCP variable must have non-empty values for id, name, number, region, and zone."
+    condition     = length(var.GCP.id) > 0 && length(var.GCP.region) > 0
+    error_message = "The GCP variable must have non-empty values for id, region."
   }
 
 }
