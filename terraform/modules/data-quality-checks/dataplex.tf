@@ -1,5 +1,8 @@
 # Random suffix for the resource name
 resource "random_string" "random_suffix" {
+
+  for_each = var.QA.checks
+
   length  = 4
   special = false
   upper   = false
@@ -14,7 +17,7 @@ resource "google_dataplex_datascan" "qa_checks" {
   location = var.GCP.region
   data_scan_id = replace(
     lower(
-      "qa-scan--${each.value.BQTable.dataset_id}-${each.value.BQTable.table_id}--${var.ENV}--${random_string.random_suffix.result}"
+      "qa-scan--${each.value.bigquery.dataset_id}-${each.value.bigquery.table_id}--${var.ENV}--${random_string.random_suffix[each.key].result}"
       ),
     "_",
     "-"
@@ -25,7 +28,7 @@ resource "google_dataplex_datascan" "qa_checks" {
   }
 
   data {
-    resource = "//bigquery.googleapis.com/projects/${var.GCP.id}/datasets/${each.value.BQTable.dataset_id}/tables/${each.value.BQTable.table_id}"
+    resource = "//bigquery.googleapis.com/projects/${var.GCP.id}/datasets/${each.value.bigquery.dataset_id}/tables/${each.value.bigquery.table_id}"
   }
 
   # Define the execution spec for the data scan
