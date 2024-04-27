@@ -30,21 +30,31 @@ variable "QA" {
   description = "Collection of Quality Assurance checks to be run on the BigQuery table"
 
   type = object({
+    
+    # Notification channel to be used for alerting: syntax: projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
+    notification_channel = optional(string)
+    
+    # Identification of the BigQuery table to store the QA results
     result = object({
       dataset_id = string
       table_id   = string
     })
+    
     checks = map(
       object({
+        alert_policy = optional(bool)       # Flag to enable alerting for the QA checks
         sampling_percent = optional(number) # Percentage of the table to be scanned
         row_filter       = optional(string) # SQL filter to be applied to the table before scanning
+        
         # Path to the YAML file containing the QA rules
         checks_specification = string
+        
         # Identification of the BigQuery table to be scanned
         bigquery = object({
           dataset_id = string
           table_id   = string
         })
+        
         # Optional schedule for the QA checks (if not provided, the checks will be run on-demand)
         execution_spec = object({
           field = optional(string) # Field to be used for incremental scans
@@ -58,5 +68,7 @@ variable "QA" {
         })
       })
     )
+
   })
+  
 }

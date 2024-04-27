@@ -1,27 +1,9 @@
-# Random suffix for the resource name
-resource "random_string" "random_suffix" {
-
-  for_each = var.QA.checks
-
-  length  = 4
-  special = false
-  upper   = false
-  numeric = false
-  lower   = true
-}
-
 resource "google_dataplex_datascan" "qa_checks" {
 
   for_each = var.QA.checks
 
   location = var.GCP.region
-  data_scan_id = replace(
-    lower(
-      "qa-scan--${each.value.bigquery.dataset_id}-${each.value.bigquery.table_id}--${var.ENV}--${random_string.random_suffix[each.key].result}"
-      ),
-    "_",
-    "-"
-  )
+  data_scan_id = local.naming_patterns[each.key].data_scan_id
 
   labels = {
     environment = lower(var.ENV)
