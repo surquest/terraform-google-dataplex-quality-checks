@@ -28,7 +28,7 @@ resource "google_monitoring_alert_policy" "alert_policies" {
             }
             comparison = "COMPARISON_GE"
             duration   = "0s"
-            filter     = "resource.type = \"dataplex.googleapis.com/DataScan\" AND resource.labels.datascan_id = \"${local.naming_patterns[each.key].data_scan_id}\" AND metric.type = \"logging.googleapis.com/log_entry_count\" AND metric.labels.severity = one_of(\"WARNING\")"
+            filter     = "resource.type = \"dataplex.googleapis.com/DataScan\" AND resource.labels.datascan_id = \"${local.namings[each.key].data_scan_id}\" AND metric.type = \"logging.googleapis.com/log_entry_count\" AND metric.labels.severity = one_of(\"WARNING\")"
             trigger {
                 count = 1
             }   

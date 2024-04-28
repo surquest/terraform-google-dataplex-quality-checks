@@ -11,7 +11,7 @@ resource "random_string" "random_suffix" {
 }
 
 locals {
-    naming_patterns = {
+    namings = {
         for key, val in var.var.QA.checks : key => {
             
             data_scan_id = replace(

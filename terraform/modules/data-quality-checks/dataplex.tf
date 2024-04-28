@@ -3,7 +3,7 @@ resource "google_dataplex_datascan" "qa_checks" {
   for_each = var.QA.checks
 
   location = var.GCP.region
-  data_scan_id = local.naming_patterns[each.key].data_scan_id
+  data_scan_id = local.namings[each.key].data_scan_id
 
   labels = {
     environment = lower(var.ENV)
