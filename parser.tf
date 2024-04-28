@@ -3,9 +3,9 @@ locals {
 
     checks = {
         for key, val in var.QA.checks : key => {
-            # data_qaulity_checks_raw = yamldecode(file(val.checks_specification))
+            # data_qaulity_checks_raw = yamldecode(file(val.rules_specification))
             rules = [
-                for rule in try(yamldecode(file(val.checks_specification)).rules, []) : {
+                for rule in try(yamldecode(file(val.rules_specification)).rules, []) : {
                 column               = try(rule.column, null)
                 ignore_null          = try(rule.ignoreNull, rule.ignore_null, null)
                 dimension            = rule.dimension

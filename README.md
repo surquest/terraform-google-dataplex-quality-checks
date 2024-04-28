@@ -35,7 +35,7 @@ module "data_quality_checks" {
                 # Extra configurations for the quality check
                 # sampling_percent = 10 # Percentage of the table to be scanned
                 # row_filter = "date >= '2021-01-01'" # Filter to be applied to the table
-                checks_specification = "path/to/check.specification.yaml"   # Path to the check specification file
+                rules_specification = "path/to/rules.specification.yaml"   # Path to the check specification file
                 execution_spec = {} 
                 # Alternative execution specification for scheduled checks
                 # execution_spec = {

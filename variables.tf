@@ -47,7 +47,7 @@ variable "QA" {
         row_filter       = optional(string) # SQL filter to be applied to the table before scanning
         
         # Path to the YAML file containing the QA rules
-        checks_specification = string
+        rules_specification = string
         
         # Identification of the BigQuery table to be scanned
         bigquery = object({
