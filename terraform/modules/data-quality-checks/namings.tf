@@ -12,11 +12,11 @@ resource "random_string" "random_suffix" {
 
 locals {
     namings = {
-        for key, val in var.var.QA.checks : key => {
+        for key, val in var.QA.checks : key => {
             
             data_scan_id = replace(
                 lower(
-                "qa-scan--${each.value.bigquery.dataset_id}-${each.value.bigquery.table_id}--${var.ENV}--${random_string.random_suffix[each.key].result}"
+                "qa-scan--${val.bigquery.dataset_id}-${val.bigquery.table_id}--${var.ENV}--${random_string.random_suffix[key].result}"
                 ),
                 "_",
                 "-"

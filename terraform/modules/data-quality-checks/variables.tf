@@ -42,7 +42,7 @@ variable "QA" {
     
     checks = map(
       object({
-        alert_policy = optional(bool)       # Flag to enable alerting for the QA checks
+        alert_policy_enabled = optional(bool)       # Flag to enable alerting for the QA checks
         sampling_percent = optional(number) # Percentage of the table to be scanned
         row_filter       = optional(string) # SQL filter to be applied to the table before scanning
         
