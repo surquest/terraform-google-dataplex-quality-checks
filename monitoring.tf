@@ -16,7 +16,7 @@ resource "google_monitoring_alert_policy" "alert_policies" {
 
     combiner     = "OR"
     conditions {
-        display_name = "Data QA scans: no failed rule"
+        display_name = "Data QA scans: https://console.cloud.google.com/dataplex/govern/quality/${local.namings[each.key].data_scan_id};location=${var.GCP.region}?project=${var.GCP.id}"
         condition_threshold {
             aggregations {
                 alignment_period   = "86400s"           # 1 day
