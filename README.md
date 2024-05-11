@@ -15,8 +15,11 @@ The implementation of the module is designed to be used easily in any infrastruc
 To use the module in your terraform project, you can include the module in your terraform configuration file as follows:
 
 ```hcl
-module "data_quality_checks" {
-    source  = "registry.terraform.io/surquest/dataplex-quality-checks/google//terraform/modules/data-quality-checks"
+module "dataplex_quality_checks" {
+
+    source  = "surquest/dataplex-quality-checks/google"
+    version = "0.0.9"
+    
     # Google Cloud Platform project configuration 
     GCP = {
         id = "your-gcp-project-id"

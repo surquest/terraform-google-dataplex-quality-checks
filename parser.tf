@@ -5,7 +5,18 @@ locals {
         for key, val in var.QA.checks : key => {
             # data_qaulity_checks_raw = yamldecode(file(val.rules_specification))
             rules = [
-                for rule in try(yamldecode(file(val.rules_specification)).rules, []) : {
+                for rule in try(
+                    yamldecode(
+                        templatefile(
+                            val.rules_specification,
+                            {
+                                GCP_PROJECT = var.GCP.id
+                                GCP_BQ_DATASET = val.bigquery.dataset_id
+                                GCP_BQ_TABLE = val.bigquery.table_id
+                            }
+                        )
+                    ).rules, []
+                    ) : {
                 column               = try(rule.column, null)
                 ignore_null          = try(rule.ignoreNull, rule.ignore_null, null)
                 dimension            = rule.dimension
