@@ -7,6 +7,7 @@ resource "google_dataplex_datascan" "qa_checks" {
 
   labels = {
     environment = lower(var.ENV)
+    solution    = "data-quality-checks"
   }
 
   data {
