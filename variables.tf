@@ -48,6 +48,7 @@ variable "QA" {
         
         # Path to the YAML file containing the QA rules
         rules_specification = string
+        data_scan_id        = optional(string) # Unique identifier for the QA scan
         
         # Identification of the BigQuery table to be scanned
         bigquery = object({
